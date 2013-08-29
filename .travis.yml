@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '0.10'
+env:
+  global:
+  - secure: EyQ+4g03UKWmWZCjWsVpsj1FgYI8YN2ocRBzAwAkgPhN0BAx8BrOvlbKVyHWN/jArNmP/RyTXDeNEb5H/nszgiwptV1K4R3Cvl2Rwy73OUiYMlI5P3BbCdiDcJXwl7YakmO3g+5UEaRjVcXaLq3/awc9h5gdgRA5CrS/CVO/LeM=
+  - GH_OWNER: Axonn
+  - GH_PROJECT_NAME: videojs-plugin-components
+after_success:
+- if git checkout master; then git checkout -b master; fi
+- cp build/js/vjsplugincomponents.js vjsplugincomponents.js
+- git add -f vjsplugincomponents.js
+- git config user.name "travis-ci"
+- git config user.email "corwin.tomkinson@adfero.co.uk"
+- git commit -am "add build files to master [ci skip]"
+- git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:master > /dev/null 2>&1
+  
