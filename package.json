@@ -15,5 +15,9 @@
   },
   "scripts": {
     "test": "grunt test --verbose"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Axonn/videojs-plugin-components"
+  },
 }
