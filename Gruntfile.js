@@ -14,7 +14,7 @@ module.exports = function (grunt) {
 		  src: "build/js/vjsplugincomponents.js",
 		  options: {
 			specs: "build/test/vjsplugincomponentstests.js",
-			vendor: "components/jquery/jquery.min.js",
+			vendor: "bower_components/jquery/jquery.min.js",
 		  }
 	  }
     },
