@@ -31,3 +31,4 @@ _ReSharper*/
 *.js.map
 node_modules/
 components/
+build/
