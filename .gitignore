@@ -27,8 +27,6 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-*.js
-*.js.map
 node_modules/
 components/
 build/
