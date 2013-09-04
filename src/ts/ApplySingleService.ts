@@ -5,8 +5,7 @@ module VjsPluginComponents {
     export function ApplySingleService(player: IPlayer) {
         return (serviceName: string) => {
             return (serviceConstructor: () => Object) => {
-                var children = player.children();
-                var service = jQuery.grep(children, (child) => { return child["serviceName"] === serviceName})[0];
+                var service = GetService(player, serviceName); 
                 if (typeof service === "undefined") {
                     service = serviceConstructor();
                     service["serviceName"] = serviceName;
@@ -15,5 +14,10 @@ module VjsPluginComponents {
                 return service;
             }
         }
+    }
+
+    export function GetService(player: IPlayer, serviceName: string) {
+        var children = player.children();
+        return jQuery.grep(children, (child) => { return child["serviceName"] === serviceName })[0];
     }
 }
