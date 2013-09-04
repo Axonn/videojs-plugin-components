@@ -70,6 +70,7 @@ describe("overlay repository", function () {
         }];
 
         overlay = {
+            name: "testOverlay1",
             displayTimes: displayTimes,
             template: template,
             model: model,
@@ -164,6 +165,8 @@ describe("overlay repository", function () {
 
         expect(layerRepoCreateSpy).toHaveBeenCalledWith(overlay);
 
+        expect(sut.getEntityByName(overlay.name).name).toEqual(overlay.name);
+
         // Move these to layer repo tests
 
         //expect(renderSpy).toHaveBeenCalledWith(template.name, { model: model }, jasmine.any(Function));
@@ -209,6 +212,7 @@ describe("overlay repository", function () {
         var onCreateSpy = jasmine.createSpy('event.onCreate');
 
         var localOverlay: VjsPluginComponents.IOverlaySpecification = {
+            name: "testOverlay",
             displayTimes: displayTimes,
             template: template,
             model: model,

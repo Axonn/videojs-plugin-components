@@ -33,6 +33,7 @@ module VjsPluginComponents {
 
             var overlay : IOverlay = {
                 id: 0,
+                name: overlaySpecification.name,
                 layer: layer
             }
 
@@ -76,6 +77,10 @@ module VjsPluginComponents {
 
         getEntity(id: number) {
             return <IOverlay>this._baseRepository.getEntity(id);
+        }
+
+        getEntityByName(name: string) {
+            return jQuery.grep(this.toList(), (overlay: IOverlay, i) => { return overlay.name === name })[0];
         }
 
         remove(id: number) {

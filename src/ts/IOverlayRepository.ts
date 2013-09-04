@@ -4,5 +4,6 @@
 module VjsPluginComponents {
     export interface IOverlayRepository extends VjsPluginComponents.IObservableRepository {
         createFromSpecification(layer: IOverlaySpecification): IOverlay;
+        getEntityByName(name: string): IOverlay;
     }
 }

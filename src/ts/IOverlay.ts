@@ -4,6 +4,7 @@
 module VjsPluginComponents {
     export interface IOverlay {
         id: number;
+        name: string;
         layer: ILayer;
         event?: ITimeBasedEvent;
     }
