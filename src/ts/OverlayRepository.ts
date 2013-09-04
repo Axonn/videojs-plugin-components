@@ -38,7 +38,7 @@ module VjsPluginComponents {
 
             var overlay = this.create(overlay);
 
-            TriggerEventHooks(overlaySpecification.events, "onCreate", { player: this._player, overlay: overlay });
+            TriggerEventHooks(overlaySpecification.events, "onCreate", { player: this._player, overlay: overlay, overlays: this });
 
             var registerOverlayDisplayFunc = this.registerOverlayDisplay(overlay);
 

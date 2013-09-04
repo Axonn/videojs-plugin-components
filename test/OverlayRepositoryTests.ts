@@ -242,7 +242,7 @@ describe("overlay repository", function () {
         //expect(createContainerSpy).toHaveBeenCalledWith(0);
         //expect(createContainerSpy).toHaveBeenCalledWith(1);
 
-        expect(onCreateSpy).toHaveBeenCalledWith({ overlay: jasmine.any(Object), player: player });
+        expect(onCreateSpy).toHaveBeenCalledWith({ overlay: jasmine.any(Object), player: player, overlays: sut });
     });
 
 });
