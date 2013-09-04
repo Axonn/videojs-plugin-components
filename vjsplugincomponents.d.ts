@@ -103,6 +103,7 @@ declare module VjsPluginComponents {
         currentTime(time?: number): number;
         techName(): string;
         play();
+        pause();
         options(): Object;
         duration(): number;
         setVideo(video: VjsPluginComponents.IVideo);
@@ -113,6 +114,7 @@ declare module VjsPluginComponents {
 }
 declare module VjsPluginComponents {
     function ApplySingleService(player: IPlayer): (serviceName: string) => (serviceConstructor: () => Object) => any;
+    function GetService(player: IPlayer, serviceName: string);
 }
 declare module VjsPluginComponents {
     class Component {
@@ -458,6 +460,7 @@ declare module VjsPluginComponents {
         public currentTime(time?: string): number;
         public techName(): string;
         public play(): void;
+        public pause(): void;
         public options(): Object;
         public src(source?): Object;
         public changeSrcResetTime(source): Object;

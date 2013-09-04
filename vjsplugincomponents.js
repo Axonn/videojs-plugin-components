@@ -3,10 +3,7 @@ var VjsPluginComponents;
     function ApplySingleService(player) {
         return function (serviceName) {
             return function (serviceConstructor) {
-                var children = player.children();
-                var service = jQuery.grep(children, function (child) {
-                    return child["serviceName"] === serviceName;
-                })[0];
+                var service = GetService(player, serviceName);
                 if (typeof service === "undefined") {
                     service = serviceConstructor();
                     service["serviceName"] = serviceName;
@@ -17,6 +14,14 @@ var VjsPluginComponents;
         };
     }
     VjsPluginComponents.ApplySingleService = ApplySingleService;
+
+    function GetService(player, serviceName) {
+        var children = player.children();
+        return jQuery.grep(children, function (child) {
+            return child["serviceName"] === serviceName;
+        })[0];
+    }
+    VjsPluginComponents.GetService = GetService;
 })(VjsPluginComponents || (VjsPluginComponents = {}));
 var VjsPluginComponents;
 (function (VjsPluginComponents) {
@@ -1106,6 +1111,10 @@ var VjsPluginComponents;
 
         Player.prototype.play = function () {
             this._player.play();
+        };
+
+        Player.prototype.pause = function () {
+            this._player.pause();
         };
 
         Player.prototype.options = function () {
