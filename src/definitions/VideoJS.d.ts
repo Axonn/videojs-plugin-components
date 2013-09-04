@@ -59,6 +59,7 @@ declare module _V_ {
 
     export interface IPlayer extends IComponent {
         play();
+        pause();
         currentTime(time? : string);
         src(source?: string);
         techName;
@@ -68,6 +69,7 @@ declare module _V_ {
 
     export class Player extends Component implements IPlayer{
         play();
+        pause();
         currentTime();
         src(source?: string);
         techName;

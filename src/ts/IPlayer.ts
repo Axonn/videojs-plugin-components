@@ -22,6 +22,7 @@ module VjsPluginComponents {
         currentTime(time?: number): number;
         techName(): string;
         play();
+        pause();
         options(): Object;
         duration(): number;
         setVideo(video: IVideo);

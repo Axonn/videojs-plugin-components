@@ -114,6 +114,10 @@ module VjsPluginComponents {
             this._player.play();
         }
 
+        pause(): void {
+            this._player.pause();
+        }
+
         options(): Object {
             return this._player.options();
         }
