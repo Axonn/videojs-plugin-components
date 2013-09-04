@@ -64,6 +64,7 @@ declare module VjsPluginComponents {
 }
 declare module VjsPluginComponents {
     interface IOverlaySpecification extends VjsPluginComponents.ILayerSpecification {
+        name?: string;
         displayTimes: {
             type: string;
             start: (duration: number) => number;
@@ -283,6 +284,7 @@ declare module VjsPluginComponents {
 declare module VjsPluginComponents {
     interface IOverlay {
         id: number;
+        name: string;
         layer: VjsPluginComponents.ILayer;
         event?: VjsPluginComponents.ITimeBasedEvent;
     }
@@ -290,6 +292,7 @@ declare module VjsPluginComponents {
 declare module VjsPluginComponents {
     interface IOverlayRepository extends VjsPluginComponents.IObservableRepository {
         createFromSpecification(layer: VjsPluginComponents.IOverlaySpecification): VjsPluginComponents.IOverlay;
+        getEntityByName(name: string): VjsPluginComponents.IOverlay;
     }
 }
 declare module VjsPluginComponents {
@@ -427,6 +430,7 @@ declare module VjsPluginComponents {
         public trigger(eventName: string, args): void;
         public toList(): VjsPluginComponents.IOverlay[];
         public getEntity(id: number): VjsPluginComponents.IOverlay;
+        public getEntityByName(name: string): VjsPluginComponents.IOverlay;
         public remove(id: number): boolean;
         public update(Overlay: VjsPluginComponents.IOverlay): boolean;
         public clear(): boolean;

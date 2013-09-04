@@ -912,6 +912,7 @@ var VjsPluginComponents;
 
             var overlay = {
                 id: 0,
+                name: overlaySpecification.name,
                 layer: layer
             };
 
@@ -948,6 +949,12 @@ var VjsPluginComponents;
 
         OverlayRepository.prototype.getEntity = function (id) {
             return this._baseRepository.getEntity(id);
+        };
+
+        OverlayRepository.prototype.getEntityByName = function (name) {
+            return jQuery.grep(this.toList(), function (overlay, i) {
+                return overlay.name === name;
+            })[0];
         };
 
         OverlayRepository.prototype.remove = function (id) {
