@@ -117,6 +117,7 @@ describe("overlay repository", function () {
             show: jasmine.createSpy("player.show"),
             hide: jasmine.createSpy("player.hide"),
             width: jasmine.createSpy("player.width"),
+            pause: jasmine.createSpy("player.pause"),
             height: jasmine.createSpy("player.height"),
             dimensions: jasmine.createSpy("player.dimensions"),
             currentTime: jasmine.createSpy("player.currentTime"),
