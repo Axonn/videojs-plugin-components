@@ -163,7 +163,7 @@ describe("overlay repository", function () {
 
         expect(eventManagerRegisterSpy).toHaveBeenCalledWith({ id: 0, startEvent: { time: 300, handler: jasmine.any(Function) }, endEvent: { time: 300, handler: jasmine.any(Function) } });
 
-        expect(layerRepoCreateSpy).toHaveBeenCalledWith(overlay);
+        expect(layerRepoCreateSpy). toHaveBeenCalledWith(overlay);
 
         expect(sut.getEntityByName(overlay.name).name).toEqual(overlay.name);
 

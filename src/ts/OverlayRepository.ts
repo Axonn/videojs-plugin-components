@@ -41,7 +41,7 @@ module VjsPluginComponents {
 
             TriggerEventHooks(overlaySpecification.events, "onCreate", { player: this._player, overlay: overlay, overlays: this });
 
-            var registerOverlayDisplayFunc = this.registerOverlayDisplay(overlay);
+            var registerOverlayDisplayFunc = this.registerOverlayDisplay(overlay, overlaySpecification.events);
 
             //if (typeof this._player.duration() === "undefined") {
                 for (var i = 0; i < overlaySpecification.displayTimes.length; i++) {
@@ -102,7 +102,7 @@ module VjsPluginComponents {
         }
 
         ///Curried
-        private registerOverlayDisplay(overlay: IOverlay) {
+        private registerOverlayDisplay(overlay: IOverlay, events) {
             return (displayTime: { type: string; start: (videoEnd: number) => number; end: (videoEnd: number) => number; }) => {
                 return () => {
                     var convertedDisplayTime = this.convertTimesToAbsolutes(displayTime);
@@ -112,12 +112,18 @@ module VjsPluginComponents {
                         startEvent: {
                             time: convertedDisplayTime.start,
                             handler: () => {
-                                overlay.layer.container.addClass("vjsVisible") }
+                                TriggerEventHooks(events, "beforeShow", { player: this._player, overlay: overlay, overlays: this });
+                                overlay.layer.container.addClass("vjsVisible");
+                                TriggerEventHooks(events, "afterShow", { player: this._player, overlay: overlay, overlays: this });
+                            }
                         },
                         endEvent: {
                             time: convertedDisplayTime.end,
                             handler: () => {
-                                overlay.layer.container.removeClass("vjsVisible") }
+                                TriggerEventHooks(events, "beforeHide", { player: this._player, overlay: overlay, overlays: this });
+                                overlay.layer.container.removeClass("vjsVisible");
+                                TriggerEventHooks(events, "afterHide", { player: this._player, overlay: overlay, overlays: this });
+                            }
                         }
                     });
 
