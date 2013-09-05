@@ -920,7 +920,7 @@ var VjsPluginComponents;
 
             VjsPluginComponents.TriggerEventHooks(overlaySpecification.events, "onCreate", { player: this._player, overlay: overlay, overlays: this });
 
-            var registerOverlayDisplayFunc = this.registerOverlayDisplay(overlay);
+            var registerOverlayDisplayFunc = this.registerOverlayDisplay(overlay, overlaySpecification.events);
 
             for (var i = 0; i < overlaySpecification.displayTimes.length; i++) {
                 var displayTime = overlaySpecification.displayTimes[i];
@@ -975,7 +975,7 @@ var VjsPluginComponents;
             return this._baseRepository.clear();
         };
 
-        OverlayRepository.prototype.registerOverlayDisplay = function (overlay) {
+        OverlayRepository.prototype.registerOverlayDisplay = function (overlay, events) {
             var _this = this;
             return function (displayTime) {
                 return function () {
@@ -986,13 +986,17 @@ var VjsPluginComponents;
                         startEvent: {
                             time: convertedDisplayTime.start,
                             handler: function () {
+                                VjsPluginComponents.TriggerEventHooks(events, "beforeShow", { player: _this._player, overlay: overlay, overlays: _this });
                                 overlay.layer.container.addClass("vjsVisible");
+                                VjsPluginComponents.TriggerEventHooks(events, "afterShow", { player: _this._player, overlay: overlay, overlays: _this });
                             }
                         },
                         endEvent: {
                             time: convertedDisplayTime.end,
                             handler: function () {
+                                VjsPluginComponents.TriggerEventHooks(events, "beforeHide", { player: _this._player, overlay: overlay, overlays: _this });
                                 overlay.layer.container.removeClass("vjsVisible");
+                                VjsPluginComponents.TriggerEventHooks(events, "afterHide", { player: _this._player, overlay: overlay, overlays: _this });
                             }
                         }
                     });

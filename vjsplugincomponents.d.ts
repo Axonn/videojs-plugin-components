@@ -434,7 +434,7 @@ declare module VjsPluginComponents {
         public remove(id: number): boolean;
         public update(Overlay: VjsPluginComponents.IOverlay): boolean;
         public clear(): boolean;
-        private registerOverlayDisplay(overlay);
+        private registerOverlayDisplay(overlay, events);
         private convertTimesToAbsolutes(displayTime);
     }
 }
