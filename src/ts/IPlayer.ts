@@ -23,6 +23,7 @@ module VjsPluginComponents {
         techName(): string;
         play();
         pause();
+        paused();
         options(): Object;
         duration(): number;
         setVideo(video: IVideo);

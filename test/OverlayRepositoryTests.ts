@@ -116,6 +116,7 @@ describe("overlay repository", function () {
             one: playerOneSpy,
             trigger: jasmine.createSpy("player.trigger"),
             show: jasmine.createSpy("player.show"),
+            paused: jasmine.createSpy("player.paused"),
             hide: jasmine.createSpy("player.hide"),
             width: jasmine.createSpy("player.width"),
             pause: jasmine.createSpy("player.pause"),

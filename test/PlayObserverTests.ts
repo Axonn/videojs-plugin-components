@@ -47,6 +47,7 @@ describe("time based event manager", function () {
             one: jasmine.createSpy("player.one"),
             show: jasmine.createSpy("player.show"),
             hide: jasmine.createSpy("player.hide"),
+            paused: jasmine.createSpy("player.paused"),
             width: jasmine.createSpy("player.width"),
             pause: jasmine.createSpy("player.pause"),
             height: jasmine.createSpy("player.height"),
