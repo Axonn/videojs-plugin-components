@@ -1129,7 +1129,7 @@ var VjsPluginComponents;
         };
 
         Player.prototype.paused = function () {
-            this._player.paused();
+            return this._player.paused();
         };
 
         Player.prototype.options = function () {
