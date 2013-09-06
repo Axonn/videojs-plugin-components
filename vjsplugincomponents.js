@@ -1128,6 +1128,10 @@ var VjsPluginComponents;
             this._player.pause();
         };
 
+        Player.prototype.paused = function () {
+            this._player.paused();
+        };
+
         Player.prototype.options = function () {
             return this._player.options();
         };

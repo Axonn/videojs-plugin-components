@@ -105,6 +105,7 @@ declare module VjsPluginComponents {
         techName(): string;
         play();
         pause();
+        paused();
         options(): Object;
         duration(): number;
         setVideo(video: VjsPluginComponents.IVideo);
@@ -465,6 +466,7 @@ declare module VjsPluginComponents {
         public techName(): string;
         public play(): void;
         public pause(): void;
+        public paused(): void;
         public options(): Object;
         public src(source?): Object;
         public changeSrcResetTime(source): Object;
