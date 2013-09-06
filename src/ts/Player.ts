@@ -119,7 +119,7 @@ module VjsPluginComponents {
         }
 
         paused(): void {
-            this._player.paused();
+            return this._player.paused();
         }
 
         options(): Object {
