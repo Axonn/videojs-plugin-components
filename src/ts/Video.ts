@@ -8,14 +8,16 @@ module VjsPluginComponents {
     export class Video implements IVideo {
         id: string;
         overlays: IOverlaySpecification[];
+        aspectRatio: string;
         _selectedSource: IVideoSource;
         _sources: IVideoSource[];
         _setSource: (src) => void;
         _sourcesByType: { [type: string]: IVideoSource[]; } = {};
 
-        constructor(sources: IVideoSource[], setSource: (src)=>void) {
+        constructor(sources: IVideoSource[], setSource: (src)=>void, aspectRatio?: string) {
             this._sources = sources;
             this._setSource = setSource;
+            this.aspectRatio = aspectRatio || "16:9";
         }
 
         getWithSrc(src: string): any {
