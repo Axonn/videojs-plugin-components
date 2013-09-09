@@ -127,6 +127,7 @@ describe("overlay repository", function () {
             play: jasmine.createSpy("player.play"),
             currentSrc: jasmine.createSpy("player.currentSrc"),
             options: jasmine.createSpy('player.options'),
+            getVideoOffset: jasmine.createSpy('player.getVideoOffset'),
             duration: jasmine.createSpy('player.duration').andReturn(300),
             changeSrcResetTime: jasmine.createSpy("player.changeSrcResetTime"),
             changeSrcRetainTime: jasmine.createSpy("player.changeSrcRetainTime"),

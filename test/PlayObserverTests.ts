@@ -43,6 +43,7 @@ describe("time based event manager", function () {
             el: jasmine.createSpy("player.el"),
             addChild: jasmine.createSpy("player.addChild"),
             children: jasmine.createSpy("player.children"),
+            getVideoOffset: jasmine.createSpy('player.getVideoOffset'),
             off: jasmine.createSpy("player.off"),
             one: jasmine.createSpy("player.one"),
             show: jasmine.createSpy("player.show"),

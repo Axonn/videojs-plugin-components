@@ -28,6 +28,9 @@ module VjsPluginComponents {
         duration(): number;
         setVideo(video: IVideo);
         getVideo(): IVideo;
+        getVideoOffset(): {
+            x: number; y: number;
+        };
         changeSrcResetTime(source);
         changeSrcRetainTime(source);
     }

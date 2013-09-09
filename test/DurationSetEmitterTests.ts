@@ -45,6 +45,7 @@ describe("durationObserver", () => {
             one: jasmine.createSpy("player.one"),
             show: jasmine.createSpy("player.show"),
             hide: jasmine.createSpy("player.hide"),
+            getVideoOffset: jasmine.createSpy('player.getVideoOffset'),
             pause: jasmine.createSpy("player.pause"),
             paused: jasmine.createSpy("player.paused"),
             width: jasmine.createSpy("player.width"),

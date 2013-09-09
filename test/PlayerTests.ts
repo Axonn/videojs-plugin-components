@@ -3,7 +3,7 @@
 /// <reference path="../src/ts/Player.ts" />
 /// <reference path="../src/ts/IPlayer.ts" />
 /// <reference path="../src/ts/VideoSource.ts" />
-/// <chutzpah_reference path="../../../lib/JQuery/jquery-1.9.1.js" />
+/// <chutzpah_reference path="../bower_components/jquery/jquery.min.js" />
 
 describe("player", function () {
 
@@ -214,5 +214,78 @@ describe("player", function () {
         expect(player.getVideo().getPlayingSource().type).toBe(mp4Source["type"]);
 
         expect(getSrcSpy).toHaveBeenCalledWith(mp4Source);
+    });
+
+    it("returns the correct video offset", function () {
+        var url = "http://www.right.com/video.mp4";
+        var getSrcSpy = jasmine.createSpy('getSrc');
+
+        var widthSpy = jasmine.createSpy("player.width");
+        var heightSpy = jasmine.createSpy("player.height");
+
+        var selectedSource = {
+            src: url,
+            type: "mp4",
+            "data-resolution": "240p",
+        };
+
+        var mp4Source = {
+            src: "http://www.wrong.com/video.mp4",
+            type: "mp4",
+            "data-resolution": "480p",
+        };
+
+        var oggSource = {
+            src: "http://www.wrong.com/video.ogg",
+            type: "ogg",
+            "data-resolution": "480p",
+        };
+
+        var sources = [
+            selectedSource,
+            mp4Source,
+            oggSource
+        ];
+
+        var vjsPlayer = {
+            id: jasmine.createSpy("player.id"),
+            src: getSrcSpy,
+            options: jasmine.createSpy('getSrc').andReturn({
+                sources: sources
+            }
+                ),
+            dispose: jasmine.createSpy("player.dispose"),
+            createEl: jasmine.createSpy("player.createEl"),
+            el: jasmine.createSpy("player.el"),
+            addChild: jasmine.createSpy("player.addChild"),
+            children: jasmine.createSpy("player.children"),
+            on: jasmine.createSpy("player.on"),
+            off: jasmine.createSpy("player.off"),
+            one: jasmine.createSpy("player.one"),
+            trigger: jasmine.createSpy("player.trigger"),
+            show: jasmine.createSpy("player.show"),
+            hide: jasmine.createSpy("player.hide"),
+            width: widthSpy,
+            height: heightSpy,
+            dimensions: jasmine.createSpy("player.dimensions"),
+            currentTime: jasmine.createSpy("player.currentTime"),
+            techName: jasmine.createSpy("player.techName"),
+            paused: jasmine.createSpy("player.paused"),
+            pause: jasmine.createSpy("player.pause"),
+            play: jasmine.createSpy("player.play"),
+            lockShowing: jasmine.createSpy("player.lockShowing"),
+            unlockShowing: jasmine.createSpy("player.unlockShowing"),
+            currentSrc: jasmine.createSpy("player.currentSrc").andReturn(url),
+            duration: jasmine.createSpy("player.duration"),
+        }
+
+        var player: VjsPluginComponents.IPlayer = new VjsPluginComponents.Player(vjsPlayer);
+
+        widthSpy.andReturn(400);
+        heightSpy.andReturn(300);
+
+        player.getVideo().aspectRatio = "16:9";
+
+        expect(player.getVideoOffset()).toEqual({ x: 0, y: 37.5 });
     });
 });

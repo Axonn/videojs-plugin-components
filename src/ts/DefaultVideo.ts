@@ -8,6 +8,7 @@ module VjsPluginComponents {
     export class DefaultVideo implements IVideo {
         id: string;
         overlays: IOverlaySpecification[];
+        aspectRatio: string;
         _player: _V_.IPlayer;
         _selectedSource: IVideoSource;
         _sources: IVideoSource[];
@@ -18,6 +19,7 @@ module VjsPluginComponents {
             this._player = player;
             this._setSource = setSource;
             this.id = this._player.id();
+            this.aspectRatio = "16:9";
         }
 
         getWithSrc(src: string): any {

@@ -169,5 +169,22 @@ module VjsPluginComponents {
         duration(): number {
             return (Math.round(this._player.duration() * 100) / 100);
         }
+
+        getVideoOffset() {
+            var aspects = this.getVideo().aspectRatio.split(":");
+            var aspectRatio = parseFloat(aspects[0]) / parseFloat(aspects[1]);
+            var x = (this.width() - (this.height() * aspectRatio)) / 2;
+            var y = (this.height() - (this.width() / aspectRatio)) / 2;
+            if (x < 0) {
+                x = 0;
+            }
+            if (y < 0) {
+                y = 0;
+            }
+            return {
+                x: x,
+                y: y
+            };
+        }
     }
 }

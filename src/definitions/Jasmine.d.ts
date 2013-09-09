@@ -73,7 +73,7 @@ declare module jasmine {
         useMock(): void;
         installMock(): void;
         uninstallMock(): void;
-        real: void;
+        //real: void;
         assertInstalled(): void;
         isInstalled(): boolean;
         installed: any;
@@ -81,9 +81,9 @@ declare module jasmine {
 
     interface Env {
         setTimeout: any;
-        clearTimeout: void;
+        //clearTimeout: void;
         setInterval: any;
-        clearInterval: void;
+        //clearInterval: void;
         updateInterval: number;
 
         currentSpec: Spec;
@@ -269,7 +269,7 @@ declare module jasmine {
     }
 
     interface SpecFunction {
-        (spec?: Spec): void
+        (spec?: Spec): void;
     }
 
     interface SuiteOrSpec {

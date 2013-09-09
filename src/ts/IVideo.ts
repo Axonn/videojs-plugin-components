@@ -4,6 +4,7 @@
 module VjsPluginComponents {
     export interface IVideo {
         id: string;
+        aspectRatio: string;
         getPlayingSource(): VjsPluginComponents.IVideoSource;
         setPlayingSource(source: IVideoSource): void;
         setPlayingMatching(matchingFunc: (sources: IVideoSource[]) => IVideoSource);
