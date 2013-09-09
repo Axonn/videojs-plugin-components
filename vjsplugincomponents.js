@@ -346,6 +346,7 @@ var VjsPluginComponents;
             this._player = player;
             this._setSource = setSource;
             this.id = this._player.id();
+            this.aspectRatio = "16:9";
         }
         DefaultVideo.prototype.getWithSrc = function (src) {
             return jQuery.grep(this._player.options().sources, function (value) {
@@ -1182,6 +1183,23 @@ var VjsPluginComponents;
         Player.prototype.duration = function () {
             return (Math.round(this._player.duration() * 100) / 100);
         };
+
+        Player.prototype.getVideoOffset = function () {
+            var aspects = this.getVideo().aspectRatio.split(":");
+            var aspectRatio = parseFloat(aspects[0]) / parseFloat(aspects[1]);
+            var x = (this.width() - (this.height() * aspectRatio)) / 2;
+            var y = (this.height() - (this.width() / aspectRatio)) / 2;
+            if (x < 0) {
+                x = 0;
+            }
+            if (y < 0) {
+                y = 0;
+            }
+            return {
+                x: x,
+                y: y
+            };
+        };
         return Player;
     })();
     VjsPluginComponents.Player = Player;
@@ -1377,10 +1395,11 @@ var VjsPluginComponents;
 var VjsPluginComponents;
 (function (VjsPluginComponents) {
     var Video = (function () {
-        function Video(sources, setSource) {
+        function Video(sources, setSource, aspectRatio) {
             this._sourcesByType = {};
             this._sources = sources;
             this._setSource = setSource;
+            this.aspectRatio = aspectRatio || "16:9";
         }
         Video.prototype.getWithSrc = function (src) {
             return jQuery.grep(this.listSources(), function (value) {

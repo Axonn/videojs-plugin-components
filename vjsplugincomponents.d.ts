@@ -76,6 +76,7 @@ declare module VjsPluginComponents {
 declare module VjsPluginComponents {
     interface IVideo {
         id: string;
+        aspectRatio: string;
         getPlayingSource(): VjsPluginComponents.IVideoSource;
         setPlayingSource(source: VjsPluginComponents.IVideoSource): void;
         setPlayingMatching(matchingFunc: (sources: VjsPluginComponents.IVideoSource[]) => VjsPluginComponents.IVideoSource);
@@ -110,6 +111,10 @@ declare module VjsPluginComponents {
         duration(): number;
         setVideo(video: VjsPluginComponents.IVideo);
         getVideo(): VjsPluginComponents.IVideo;
+        getVideoOffset(): {
+            x: number;
+            y: number;
+        };
         changeSrcResetTime(source);
         changeSrcRetainTime(source);
     }
@@ -242,6 +247,7 @@ declare module VjsPluginComponents {
     class DefaultVideo implements VjsPluginComponents.IVideo {
         public id: string;
         public overlays: VjsPluginComponents.IOverlaySpecification[];
+        public aspectRatio: string;
         public _player: _V_.IPlayer;
         public _selectedSource: VjsPluginComponents.IVideoSource;
         public _sources: VjsPluginComponents.IVideoSource[];
@@ -472,6 +478,10 @@ declare module VjsPluginComponents {
         public changeSrcResetTime(source): Object;
         public changeSrcRetainTime(source): Object;
         public duration(): number;
+        public getVideoOffset(): {
+            x: number;
+            y: number;
+        };
     }
 }
 declare module VjsPluginComponents {
@@ -534,13 +544,14 @@ declare module VjsPluginComponents {
     class Video implements VjsPluginComponents.IVideo {
         public id: string;
         public overlays: VjsPluginComponents.IOverlaySpecification[];
+        public aspectRatio: string;
         public _selectedSource: VjsPluginComponents.IVideoSource;
         public _sources: VjsPluginComponents.IVideoSource[];
         public _setSource: (src: any) => void;
         public _sourcesByType: {
             [type: string]: VjsPluginComponents.IVideoSource[];
         };
-        constructor(sources: VjsPluginComponents.IVideoSource[], setSource: (src: any) => void);
+        constructor(sources: VjsPluginComponents.IVideoSource[], setSource: (src: any) => void, aspectRatio?: string);
         public getWithSrc(src: string): any;
         public getPlayingSource(): VjsPluginComponents.IVideoSource;
         public setPlayingMatching(matchFunc: (sources: VjsPluginComponents.IVideoSource[]) => VjsPluginComponents.IVideoSource): void;
