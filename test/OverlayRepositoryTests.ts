@@ -1,6 +1,6 @@
 /// <reference path="../src/definitions/Jasmine.d.ts" />
 /// <reference path="../src/definitions/JQuery.d.ts" />
-/// <chutzpah_reference path="../../../lib/JQuery/jquery-1.9.1.js" />
+/// <chutzpah_reference path="../bower_components/jquery/jquery.min.js" />
 /// <reference path="../src/ts/OverlayRepository.ts" />
 /// <reference path="../src/ts/Observable.ts" />
 /// <reference path="../src/ts/LayerRepository.ts" />
@@ -165,7 +165,7 @@ describe("overlay repository", function () {
 
         expect(eventManagerRegisterSpy).toHaveBeenCalledWith({ id: 0, startEvent: { time: 300, handler: jasmine.any(Function) }, endEvent: { time: 300, handler: jasmine.any(Function) } });
 
-        expect(layerRepoCreateSpy). toHaveBeenCalledWith(overlay);
+        expect(layerRepoCreateSpy).toHaveBeenCalledWith(overlay);
 
         expect(sut.getEntityByName(overlay.name).name).toEqual(overlay.name);
 
@@ -251,4 +251,39 @@ describe("overlay repository", function () {
         expect(onCreateSpy).toHaveBeenCalledWith({ overlay: jasmine.any(Object), player: player, overlays: sut });
     });
 
+    it("correctly removes an overlay with no display times", function () {
+        var sut = new VjsPluginComponents.OverlayRepository(new VjsPluginComponents.ObservableRepository(new VjsPluginComponents.Observable()), player, layerRepository, eventRepository);
+
+        var onCreateSpy = jasmine.createSpy('event.onCreate');
+        layerRepoCreateSpy.andReturn({
+            id: 1,
+            container: jQuery(".something")
+        });
+
+        var localOverlay: VjsPluginComponents.IOverlaySpecification = {
+            name: "testOverlay",
+            displayTimes: [],
+            template: template,
+            model: model,
+            events: {}
+        };
+
+        var overlay = sut.createFromSpecification(localOverlay);
+        
+        for (var i = 0; i < playerOneSpy.argsForCall.length; i++) {
+            if (playerOneSpy.argsForCall[i][0] == "durationset") {
+                playerOneSpy.argsForCall[i][1]();
+            }
+        }
+
+        for (var i = 0; i < renderSpy.argsForCall.length; i++) {
+            if (renderSpy.argsForCall[i][0] == template.name) {
+                renderSpy.argsForCall[i][2](errorSpy, outputSpy);
+            }
+        }
+
+        sut.remove(overlay.id);
+
+        expect(sut.getEntity(overlay.id)).toBe(null);
+    });
 });

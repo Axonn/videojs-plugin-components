@@ -88,7 +88,9 @@ module VjsPluginComponents {
 
             this._layerRepository.remove(entity.layer.id);
 
-            this._eventRepository.remove(entity.event.id)
+            if (typeof (entity.event) !== "undefined") {
+                this._eventRepository.remove(entity.event.id)
+            }
 
             return this._baseRepository.remove(id);
         }

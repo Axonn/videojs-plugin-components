@@ -7,14 +7,17 @@ module VjsPluginComponents {
     export class ObservableRepository implements IObservableRepository {
         _objects: IEntity[];
         _observable: IObservable;
+        _idCount: number;
 
         constructor(observable : IObservable) {
             this._objects = [];
             this._observable = observable;
+            this._idCount = 1;
         }
 
         create(entity: IEntity) {
-            entity.id = GetNextFreeId(this._objects);
+            entity.id = this._idCount;
+            this._idCount++;
             this._objects.push(entity);
             this.trigger("create", { entity: entity });
             return entity;
