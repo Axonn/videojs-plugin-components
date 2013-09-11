@@ -52,9 +52,10 @@ module VjsPluginComponents {
 
         remove(id: number) {
             var entity = this.getEntity(id);
-
-            this._singlePointEventRepository.remove(entity.endEvent.id);
-            this._singlePointEventRepository.remove(entity.startEvent.id);
+            if (entity !== null) {
+                this._singlePointEventRepository.remove(entity.endEvent.id);
+                this._singlePointEventRepository.remove(entity.startEvent.id);
+            }
 
             return this._baseRepository.remove(id);
         }
