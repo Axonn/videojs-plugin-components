@@ -61,7 +61,9 @@ module VjsPluginComponents {
         remove(id: number) {
             var layer = this.getEntity(id);
 
-            layer.container.remove();
+            if (layer !== null) {
+                layer.container.remove();
+            }
 
             return this._baseRepository.remove(id);
         }
