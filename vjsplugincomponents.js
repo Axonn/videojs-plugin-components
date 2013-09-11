@@ -592,7 +592,9 @@ var VjsPluginComponents;
         LayerRepository.prototype.remove = function (id) {
             var layer = this.getEntity(id);
 
-            layer.container.remove();
+            if (layer !== null) {
+                layer.container.remove();
+            }
 
             return this._baseRepository.remove(id);
         };
