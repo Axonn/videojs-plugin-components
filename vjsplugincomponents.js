@@ -468,9 +468,11 @@ var VjsPluginComponents;
         function ObservableRepository(observable) {
             this._objects = [];
             this._observable = observable;
+            this._idCount = 1;
         }
         ObservableRepository.prototype.create = function (entity) {
-            entity.id = VjsPluginComponents.GetNextFreeId(this._objects);
+            entity.id = this._idCount;
+            this._idCount++;
             this._objects.push(entity);
             this.trigger("create", { entity: entity });
             return entity;
@@ -963,7 +965,9 @@ var VjsPluginComponents;
 
             this._layerRepository.remove(entity.layer.id);
 
-            this._eventRepository.remove(entity.event.id);
+            if (typeof (entity.event) !== "undefined") {
+                this._eventRepository.remove(entity.event.id);
+            }
 
             return this._baseRepository.remove(id);
         };

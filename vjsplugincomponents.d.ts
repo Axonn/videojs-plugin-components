@@ -319,6 +319,7 @@ declare module VjsPluginComponents {
     class ObservableRepository implements VjsPluginComponents.IObservableRepository {
         public _objects: VjsPluginComponents.IEntity[];
         public _observable: VjsPluginComponents.IObservable;
+        public _idCount: number;
         constructor(observable: VjsPluginComponents.IObservable);
         public create(entity: VjsPluginComponents.IEntity): VjsPluginComponents.IEntity;
         public getEntity(id: number): VjsPluginComponents.IEntity;
