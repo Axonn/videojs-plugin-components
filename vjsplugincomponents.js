@@ -977,7 +977,12 @@ var VjsPluginComponents;
         };
 
         OverlayRepository.prototype.clear = function () {
-            return this._baseRepository.clear();
+            var items = this._baseRepository.toList();
+            for (var i = 0; i < items.length; i++) {
+                this.remove(items[i].id);
+            }
+
+            return true;
         };
 
         OverlayRepository.prototype.registerOverlayDisplay = function (overlay, events) {
