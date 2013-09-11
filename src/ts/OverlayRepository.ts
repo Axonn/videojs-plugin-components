@@ -100,7 +100,12 @@ module VjsPluginComponents {
         }
 
         clear() {
-            return this._baseRepository.clear();
+            var items = this._baseRepository.toList()
+            for (var i = 0; i < items.length; i++) {
+                this.remove(items[i].id);
+            }
+
+            return true;
         }
 
         ///Curried
