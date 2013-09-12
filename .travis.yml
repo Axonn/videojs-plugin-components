@@ -19,6 +19,6 @@ after_success:
 - git config user.name "travis-ci"
 - git config user.email "corwin.tomkinson@adfero.co.uk"
 - git commit -am "add build files to master [ci skip]"
-- if [ "$version" != "$oldversion" ]; then git tag -a $version -m "new AtlantisJS Version released"; fi
+- if [ "$version" != "$oldversion" ]; then git tag -a $version -m "new Plugin Components Version released"; fi
 - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:master > /dev/null 2>&1 --tags
   
