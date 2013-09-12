@@ -9,8 +9,10 @@ env:
   - GH_OWNER: Axonn
   - GH_PROJECT_NAME: videojs-plugin-components
 after_success:
-- version=$(head -n 1 version.txt) -v
-- oldversion=$(git describe --tags) -v
+- version=$(head -n 1 version.txt)
+- echo $version
+- oldversion=$(git describe --tags)
+- echo $oldversion
 - if git checkout master; then git checkout -b master; fi
 - cp build/js/vjsplugincomponents.js vjsplugincomponents.js
 - cp build/js/vjsplugincomponents.d.ts vjsplugincomponents.d.ts 
