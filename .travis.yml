@@ -9,6 +9,7 @@ env:
   - GH_OWNER: Axonn
   - GH_PROJECT_NAME: videojs-plugin-components
 after_success:
+- version=$(head -n 1 version.txt)
 - if git checkout master; then git checkout -b master; fi
 - cp build/js/vjsplugincomponents.js vjsplugincomponents.js
 - cp build/js/vjsplugincomponents.d.ts vjsplugincomponents.d.ts 
@@ -18,4 +19,6 @@ after_success:
 - git config user.email "corwin.tomkinson@adfero.co.uk"
 - git commit -am "add build files to master [ci skip]"
 - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:master > /dev/null 2>&1
+- git tag -a $version -m "new AtlantisJS Version released"
+- git push --tags
   
