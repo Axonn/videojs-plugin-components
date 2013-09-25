@@ -137,7 +137,7 @@ module VjsPluginComponents {
             var oldTime = this._player.currentTime();
 
             var continueVideo = () => {
-                if (this.duration() === 0 || this.currentSrc() !== source) {
+                if (this.duration() !== 0 && this.currentSrc() === source) {
                     if (!videoContinued) {
                         this._player.currentTime(oldTime);
                         if (!wasPaused) {
