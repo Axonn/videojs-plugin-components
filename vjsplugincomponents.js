@@ -1153,11 +1153,15 @@ var VjsPluginComponents;
             if (source === undefined) {
                 return this._player.src();
             } else {
+                var wasPaused = this._player.paused();
+                this._player.pause();
                 var oldTime = this._player.currentTime();
 
                 this.one('loadedmetadata', function () {
                     _this._player.currentTime(oldTime);
-                    _this._player.play();
+                    if (!wasPaused) {
+                        _this._player.play();
+                    }
                 });
                 return this._player.src(source);
             }
