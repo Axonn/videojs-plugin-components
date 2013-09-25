@@ -130,16 +130,28 @@ module VjsPluginComponents {
             if (source === undefined) {
                 return this._player.src();
             } else {
+                var videoContinued = false;
                 var wasPaused = this._player.paused();
                 this._player.pause();
                 var oldTime = this._player.currentTime();
 
-                this.one('loadedmetadata', () => {
-                    this._player.currentTime(oldTime);
-                    if (!wasPaused) {
-                        this._player.play();
+                var continueVideo = () => {
+                    if (this.duration() === 0 || this.src() !== source) {
+                        if (!videoContinued) {
+                            this._player.currentTime(oldTime);
+                            if (!wasPaused) {
+                                this._player.play();
+                            }
+                            videoContinued = true;
+                        }
+                        this.off('loadedmetadata', continueVideo);
+                        this.off('durationset', continueVideo);
                     }
-                });
+                }
+
+                this.on('loadedmetadata', continueVideo);
+                this.on('durationset', continueVideo);
+
                 return this._player.src(source);
             }
         }
