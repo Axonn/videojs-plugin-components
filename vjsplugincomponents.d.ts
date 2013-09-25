@@ -107,6 +107,8 @@ declare module VjsPluginComponents {
         play();
         pause();
         paused();
+        src();
+        currentSrc();
         options(): Object;
         duration(): number;
         setVideo(video: VjsPluginComponents.IVideo);
@@ -251,11 +253,11 @@ declare module VjsPluginComponents {
         public _player: _V_.IPlayer;
         public _selectedSource: VjsPluginComponents.IVideoSource;
         public _sources: VjsPluginComponents.IVideoSource[];
-        public _setSource: (src: any) => void;
+        public _setSource: (src: string) => void;
         public _sourcesByType: {
             [type: string]: VjsPluginComponents.IVideoSource[];
         };
-        constructor(player, setSource: (src: any) => void);
+        constructor(player, setSource: (src: string) => void);
         public getWithSrc(src: string): any;
         public getPlayingSource(): VjsPluginComponents.IVideoSource;
         public setPlayingMatching(matchFunc: (sources: VjsPluginComponents.IVideoSource[]) => VjsPluginComponents.IVideoSource): void;
@@ -475,6 +477,7 @@ declare module VjsPluginComponents {
         public pause(): void;
         public paused(): void;
         public options(): Object;
+        public currentSrc(): Object;
         public src(source?): Object;
         public changeSrcResetTime(source): Object;
         public changeSrcRetainTime(source): Object;
@@ -552,7 +555,7 @@ declare module VjsPluginComponents {
         public _sourcesByType: {
             [type: string]: VjsPluginComponents.IVideoSource[];
         };
-        constructor(sources: VjsPluginComponents.IVideoSource[], setSource: (src: any) => void, aspectRatio?: string);
+        constructor(sources: VjsPluginComponents.IVideoSource[], setSource: (src: string) => void, aspectRatio?: string);
         public getWithSrc(src: string): any;
         public getPlayingSource(): VjsPluginComponents.IVideoSource;
         public setPlayingMatching(matchFunc: (sources: VjsPluginComponents.IVideoSource[]) => VjsPluginComponents.IVideoSource): void;

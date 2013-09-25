@@ -369,7 +369,7 @@ var VjsPluginComponents;
 
         DefaultVideo.prototype.setPlayingSource = function (source) {
             this._selectedSource = source;
-            this._setSource(this.getWithSrc(source.src));
+            this._setSource(source.src);
         };
 
         DefaultVideo.prototype.listSourcesByType = function (type) {
@@ -1148,63 +1148,55 @@ var VjsPluginComponents;
             return this._player.options();
         };
 
+        Player.prototype.currentSrc = function () {
+            return this._player.currentSrc();
+        };
+
         Player.prototype.src = function (source) {
             var _this = this;
-            if (source === undefined) {
-                return this._player.src();
-            } else {
-                var videoContinued = false;
-                var wasPaused = this._player.paused();
-                this._player.pause();
-                var oldTime = this._player.currentTime();
+            var videoContinued = false;
+            var wasPaused = this._player.paused();
+            this._player.pause();
+            var oldTime = this._player.currentTime();
 
-                var continueVideo = function () {
-                    if (_this.duration() === 0 || _this.src() !== source) {
-                        if (!videoContinued) {
-                            _this._player.currentTime(oldTime);
-                            if (!wasPaused) {
-                                _this._player.play();
-                            }
-                            videoContinued = true;
+            var continueVideo = function () {
+                if (_this.duration() === 0 || _this.currentSrc() !== source) {
+                    if (!videoContinued) {
+                        _this._player.currentTime(oldTime);
+                        if (!wasPaused) {
+                            _this._player.play();
                         }
-                        _this.off('loadedmetadata', continueVideo);
-                        _this.off('durationset', continueVideo);
+                        videoContinued = true;
                     }
-                };
+                    _this.off('loadedmetadata', continueVideo);
+                    _this.off('durationset', continueVideo);
+                }
+            };
 
-                this.on('loadedmetadata', continueVideo);
-                this.on('durationset', continueVideo);
+            this.on('loadedmetadata', continueVideo);
+            this.on('durationset', continueVideo);
 
-                return this._player.src(source);
-            }
+            return this._player.src(source);
         };
 
         Player.prototype.changeSrcResetTime = function (source) {
             var _this = this;
-            if (source === undefined) {
-                return this._player.src();
-            } else {
-                this.one('loadedmetadata', function () {
-                    _this._player.currentTime("0");
-                    _this._player.play();
-                });
-                return this._player.src(source);
-            }
+            this.one('loadedmetadata', function () {
+                _this._player.currentTime("0");
+                _this._player.play();
+            });
+            return this._player.src(source);
         };
 
         Player.prototype.changeSrcRetainTime = function (source) {
             var _this = this;
-            if (source === undefined) {
-                return this._player.src();
-            } else {
-                var oldTime = this._player.currentTime();
+            var oldTime = this._player.currentTime();
 
-                this.one('loadedmetadata', function () {
-                    _this._player.currentTime(oldTime);
-                    _this._player.play();
-                });
-                return this._player.src(source);
-            }
+            this.one('loadedmetadata', function () {
+                _this._player.currentTime(oldTime);
+                _this._player.play();
+            });
+            return this._player.src(source);
         };
 
         Player.prototype.duration = function () {
@@ -1431,7 +1423,7 @@ var VjsPluginComponents;
         }
         Video.prototype.getWithSrc = function (src) {
             return jQuery.grep(this.listSources(), function (value) {
-                return value.src == src;
+                return value.src === src;
             })[0];
         };
 
@@ -1450,7 +1442,7 @@ var VjsPluginComponents;
 
         Video.prototype.setPlayingSource = function (source) {
             this._selectedSource = source;
-            this._setSource(this.getWithSrc(source.src));
+            this._setSource(source.src);
         };
 
         Video.prototype.listSourcesByType = function (type) {
