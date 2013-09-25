@@ -1160,7 +1160,7 @@ var VjsPluginComponents;
             var oldTime = this._player.currentTime();
 
             var continueVideo = function () {
-                if (_this.duration() === 0 || _this.currentSrc() !== source) {
+                if (_this.duration() !== 0 && _this.currentSrc() === source) {
                     if (!videoContinued) {
                         _this._player.currentTime(oldTime);
                         if (!wasPaused) {
