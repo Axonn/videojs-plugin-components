@@ -5,7 +5,7 @@ before_script:
 - bower install
 env:
   global:
-  - secure: EyQ+4g03UKWmWZCjWsVpsj1FgYI8YN2ocRBzAwAkgPhN0BAx8BrOvlbKVyHWN/jArNmP/RyTXDeNEb5H/nszgiwptV1K4R3Cvl2Rwy73OUiYMlI5P3BbCdiDcJXwl7YakmO3g+5UEaRjVcXaLq3/awc9h5gdgRA5CrS/CVO/LeM=
+  - secure: Q7T94/OXGWxv3Za3vxY7w+JsXxT6vYmkpxrOg5cEO6qnFH6Fb86oV/JjKNxY4bO3KC/W5gu275td4eLHl8TidfomKqHyfbOhVuPnwTt3IDPFGhMzF2LzORnc2SQN0y8MDj39IL6lmGXB9ycblHKbZEnZPvjGDd+g+KFtw/b+u4I=
   - GH_OWNER: Axonn
   - GH_PROJECT_NAME: videojs-plugin-components
 after_success:
@@ -13,9 +13,9 @@ after_success:
 - oldversion=$(git describe --abbrev=0 --tags)
 - if git checkout master; then git checkout -b master; fi
 - cp build/js/vjsplugincomponents.js vjsplugincomponents.js
-- cp build/js/vjsplugincomponents.d.ts vjsplugincomponents.d.ts 
+- cp build/js/vjsplugincomponents.d.ts vjsplugincomponents.d.ts
 - git add -f vjsplugincomponents.js
-- git add -f vjsplugincomponents.d.ts 
+- git add -f vjsplugincomponents.d.ts
 - git config user.name "travis-ci"
 - git config user.email "corwin.tomkinson@adfero.co.uk"
 - git commit -am "add build files to master [ci skip]"
