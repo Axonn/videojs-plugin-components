@@ -52,6 +52,8 @@ describe("durationObserver", () => {
             height: jasmine.createSpy("player.height"),
             dimensions: jasmine.createSpy("player.dimensions"),
             techName: jasmine.createSpy("player.techName"),
+            src: jasmine.createSpy("player.src"),
+            currentSrc: jasmine.createSpy("player.currentSrc"),
             play: jasmine.createSpy("player.play"),
             lockShowing: jasmine.createSpy("player.lockShowing"),
             unlockShowing: jasmine.createSpy("player.unlockShowing"),

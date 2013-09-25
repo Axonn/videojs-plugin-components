@@ -12,10 +12,10 @@ module VjsPluginComponents {
         _player: _V_.IPlayer;
         _selectedSource: IVideoSource;
         _sources: IVideoSource[];
-        _setSource: (src) => void;
+        _setSource: (src: string) => void;
         _sourcesByType: { [type: string]: IVideoSource[]; } = {};
 
-        constructor(player, setSource: (src) => void ) {
+        constructor(player, setSource: (src: string) => void ) {
             this._player = player;
             this._setSource = setSource;
             this.id = this._player.id();
@@ -43,7 +43,7 @@ module VjsPluginComponents {
 
         setPlayingSource(source: IVideoSource) {
             this._selectedSource = source;
-            this._setSource(this.getWithSrc(source.src));
+            this._setSource(source.src);
         }
 
         listSourcesByType(type: string): VjsPluginComponents.IVideoSource[] {

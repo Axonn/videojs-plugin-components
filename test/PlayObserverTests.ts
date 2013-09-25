@@ -46,6 +46,8 @@ describe("time based event manager", function () {
             getVideoOffset: jasmine.createSpy('player.getVideoOffset'),
             off: jasmine.createSpy("player.off"),
             one: jasmine.createSpy("player.one"),
+            src: jasmine.createSpy("player.src"),
+            currentSrc: jasmine.createSpy("player.currentSrc"),
             show: jasmine.createSpy("player.show"),
             hide: jasmine.createSpy("player.hide"),
             paused: jasmine.createSpy("player.paused"),

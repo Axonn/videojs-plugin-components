@@ -126,60 +126,52 @@ module VjsPluginComponents {
             return this._player.options();
         }
 
+        currentSrc(): Object {
+            return this._player.currentSrc();
+        }
+
         src(source?): Object {
-            if (source === undefined) {
-                return this._player.src();
-            } else {
-                var videoContinued = false;
-                var wasPaused = this._player.paused();
-                this._player.pause();
-                var oldTime = this._player.currentTime();
+            var videoContinued = false;
+            var wasPaused = this._player.paused();
+            this._player.pause();
+            var oldTime = this._player.currentTime();
 
-                var continueVideo = () => {
-                    if (this.duration() === 0 || this.src() !== source) {
-                        if (!videoContinued) {
-                            this._player.currentTime(oldTime);
-                            if (!wasPaused) {
-                                this._player.play();
-                            }
-                            videoContinued = true;
+            var continueVideo = () => {
+                if (this.duration() === 0 || this.currentSrc() !== source) {
+                    if (!videoContinued) {
+                        this._player.currentTime(oldTime);
+                        if (!wasPaused) {
+                            this._player.play();
                         }
-                        this.off('loadedmetadata', continueVideo);
-                        this.off('durationset', continueVideo);
+                        videoContinued = true;
                     }
+                    this.off('loadedmetadata', continueVideo);
+                    this.off('durationset', continueVideo);
                 }
-
-                this.on('loadedmetadata', continueVideo);
-                this.on('durationset', continueVideo);
-
-                return this._player.src(source);
             }
+
+            this.on('loadedmetadata', continueVideo);
+            this.on('durationset', continueVideo);
+
+            return this._player.src(source);
         }
 
         changeSrcResetTime(source): Object {
-            if (source === undefined) {
-                return this._player.src();
-            } else {
                 this.one('loadedmetadata', () => {
                     this._player.currentTime("0");
                     this._player.play();
                 });
                 return this._player.src(source);
-            }
         }
 
         changeSrcRetainTime(source): Object {
-            if (source === undefined) {
-                return this._player.src();
-            } else {
-                var oldTime = this._player.currentTime();
+            var oldTime = this._player.currentTime();
 
-                this.one('loadedmetadata', () => {
-                    this._player.currentTime(oldTime);
-                    this._player.play();
-                });
-                return this._player.src(source);
-            }
+            this.one('loadedmetadata', () => {
+                this._player.currentTime(oldTime);
+                this._player.play();
+            });
+            return this._player.src(source);
         }
 
         duration(): number {

@@ -14,7 +14,7 @@ module VjsPluginComponents {
         _setSource: (src) => void;
         _sourcesByType: { [type: string]: IVideoSource[]; } = {};
 
-        constructor(sources: IVideoSource[], setSource: (src)=>void, aspectRatio?: string) {
+        constructor(sources: IVideoSource[], setSource: (src: string)=>void, aspectRatio?: string) {
             this._sources = sources;
             this._setSource = setSource;
             this.aspectRatio = aspectRatio || "16:9";
@@ -23,7 +23,7 @@ module VjsPluginComponents {
         getWithSrc(src: string): any {
             return jQuery.grep(this.listSources(),
                      (value) => {
-                         return value.src == src
+                         return value.src === src
                      })[0];
         }
 
@@ -41,7 +41,7 @@ module VjsPluginComponents {
 
         setPlayingSource(source: IVideoSource) {
             this._selectedSource = source;
-            this._setSource(this.getWithSrc(source.src));
+            this._setSource(source.src);
         }
 
         listSourcesByType(type: string): VjsPluginComponents.IVideoSource[] {

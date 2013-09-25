@@ -59,6 +59,8 @@ describe("player", function () {
             width: jasmine.createSpy("player.width"),
             height: jasmine.createSpy("player.height"),
             dimensions: jasmine.createSpy("player.dimensions"),
+            src: jasmine.createSpy("player.src"),
+            currentSrc: jasmine.createSpy("player.currentSrc"),
             currentTime: jasmine.createSpy("player.currentTime"),
             techName: jasmine.createSpy("player.techName"),
             play: jasmine.createSpy("player.play"),
@@ -121,6 +123,8 @@ describe("player", function () {
             one: jasmine.createSpy("player.one"),
             trigger: jasmine.createSpy("player.trigger"),
             show: jasmine.createSpy("player.show"),
+            src: jasmine.createSpy("player.src"),
+            currentSrc: jasmine.createSpy("player.currentSrc"),
             hide: jasmine.createSpy("player.hide"),
             pause: jasmine.createSpy("player.pause"),
             width: jasmine.createSpy("player.width"),
@@ -192,6 +196,7 @@ describe("player", function () {
             show: jasmine.createSpy("player.show"),
             hide: jasmine.createSpy("player.hide"),
             width: jasmine.createSpy("player.width"),
+            currentSrc: jasmine.createSpy("player.currentSrc"),
             height: jasmine.createSpy("player.height"),
             dimensions: jasmine.createSpy("player.dimensions"),
             currentTime: jasmine.createSpy("player.currentTime"),
@@ -213,7 +218,7 @@ describe("player", function () {
         expect(player.getVideo().getPlayingSource().src).toBe(mp4Source["src"]);
         expect(player.getVideo().getPlayingSource().type).toBe(mp4Source["type"]);
 
-        expect(getSrcSpy).toHaveBeenCalledWith(mp4Source);
+        expect(getSrcSpy).toHaveBeenCalledWith(mp4Source.src);
     });
 
     it("returns the correct video offset", function () {
@@ -273,6 +278,8 @@ describe("player", function () {
             paused: jasmine.createSpy("player.paused"),
             pause: jasmine.createSpy("player.pause"),
             play: jasmine.createSpy("player.play"),
+            src: jasmine.createSpy("player.src"),
+            currentSrc: jasmine.createSpy("player.currentSrc"),
             lockShowing: jasmine.createSpy("player.lockShowing"),
             unlockShowing: jasmine.createSpy("player.unlockShowing"),
             currentSrc: jasmine.createSpy("player.currentSrc").andReturn(url),
