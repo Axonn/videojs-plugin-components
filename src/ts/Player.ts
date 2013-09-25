@@ -146,12 +146,10 @@ module VjsPluginComponents {
                         videoContinued = true;
                     }
                     this.off('loadedmetadata', continueVideo);
-                    this.off('durationset', continueVideo);
                 }
             }
 
             this.on('loadedmetadata', continueVideo);
-            this.on('durationset', continueVideo);
 
             return this._player.src(source);
         }
