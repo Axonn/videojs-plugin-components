@@ -1153,16 +1153,28 @@ var VjsPluginComponents;
             if (source === undefined) {
                 return this._player.src();
             } else {
+                var videoContinued = false;
                 var wasPaused = this._player.paused();
                 this._player.pause();
                 var oldTime = this._player.currentTime();
 
-                this.one('loadedmetadata', function () {
-                    _this._player.currentTime(oldTime);
-                    if (!wasPaused) {
-                        _this._player.play();
+                var continueVideo = function () {
+                    if (_this.duration() === 0 || _this.src() !== source) {
+                        if (!videoContinued) {
+                            _this._player.currentTime(oldTime);
+                            if (!wasPaused) {
+                                _this._player.play();
+                            }
+                            videoContinued = true;
+                        }
+                        _this.off('loadedmetadata', continueVideo);
+                        _this.off('durationset', continueVideo);
                     }
-                });
+                };
+
+                this.on('loadedmetadata', continueVideo);
+                this.on('durationset', continueVideo);
+
                 return this._player.src(source);
             }
         };
