@@ -6,7 +6,7 @@ module VjsPluginComponents {
 
         constructor(player: IPlayer) {
             var checkDuration = () => {
-                if (typeof player.duration() !== "undefined" || player.duration() === 0) {
+                if (typeof player.duration() !== "undefined" && player.duration() !== 0) {
                     player.trigger("durationset");
                 }
             };
