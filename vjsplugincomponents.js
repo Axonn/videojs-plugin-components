@@ -114,7 +114,9 @@ var VjsPluginComponents;
         };
 
         Component.prototype.unlockShowing = function () {
-            this._component.unlockShowing();
+            if (this._component.unlockShowing) {
+                this._component.unlockShowing();
+            }
         };
 
         Component.prototype.lockShowing = function () {
