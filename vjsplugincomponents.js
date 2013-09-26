@@ -1169,12 +1169,10 @@ var VjsPluginComponents;
                         videoContinued = true;
                     }
                     _this.off('loadedmetadata', continueVideo);
-                    _this.off('durationset', continueVideo);
                 }
             };
 
             this.on('loadedmetadata', continueVideo);
-            this.on('durationset', continueVideo);
 
             return this._player.src(source);
         };
