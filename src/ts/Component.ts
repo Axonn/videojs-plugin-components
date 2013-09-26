@@ -113,7 +113,9 @@ module VjsPluginComponents {
         }
 
         unlockShowing() {
-            this._component.unlockShowing();
+            if (this._component.unlockShowing) {
+                this._component.unlockShowing();
+            }
         }
 
         lockShowing() {
